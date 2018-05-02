@@ -11,11 +11,13 @@
   [num-cust num-workers]
   ; put all workers in worker channel right away
   (async/go
-    (map (partial (async/>! worker-line)) (range num-workers)))
+    (map (partial async/>! worker-line) (range 0 10))
+    (println "HELLO"))
+    (println "outside")
   ; put all customers in customer channel after sleeping
 )
 
 (defn -main
   [num-cust num-workers]
   (initialize-universe num-cust num-workers)
-  ())
+  (println "Main"))
